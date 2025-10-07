@@ -132,8 +132,7 @@ Faça login em: **[http://localhost:5173/login](http://localhost:5173/login)**
 
 | Perfil | E-mail | Senha | Permissões |
 |--------|--------|-------|------------|
-| **Gestor (Admin)** | `admin@test.com` | `password` | Acesso total + recebe relatórios diários |
-| **Vendedor** | `vendedor@test.com` | `password` | Gerenciar vendas + recebe comissões |
+| **Gestor (Admin)** | `admin@test.com` | `password` | Acesso total + recebe relatórios diários
 
 ---
 

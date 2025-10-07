@@ -23,15 +23,5 @@ class UserSeeder extends Seeder
                 'perfil' => 'Gestor',
             ]
         );
-
-        // Criar vendedor de teste se não existir
-        User::firstOrCreate(
-            ['email' => 'vendedor@test.com'],
-            [
-                'name' => 'Vendedor Teste',
-                'password' => Hash::make('password'),
-                'perfil' => 'Seller',
-            ]
-        );
     }
 }
