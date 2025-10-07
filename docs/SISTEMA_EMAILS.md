@@ -30,8 +30,7 @@
 
 | Nome | E-mail | Senha | Perfil |
 |------|--------|-------|--------|
-| Administrador | `admin@test.com` | `password` | Gestor |
-| Vendedor Teste | `vendedor@test.com` | `password` | Seller |
+| Administrador | `admin@test.com` | `password` | Gestor
 
 ---
 
@@ -150,12 +149,22 @@ http://localhost:8025
 
 ### 3. Verificar Fila
 ```bash
-# Processar manualmente
+# Ver logs do worker
+docker-compose logs -f queue
+
+# Processar manualmente (se necessário)
 docker-compose exec app php artisan queue:work --once
 
-# Ver logs
+# Ver logs de email
 docker-compose logs app | grep -i mail
 ```
+
+### 4. Worker Automático
+O sistema está configurado para iniciar o worker automaticamente:
+- ✅ Container `laravel_queue` roda em background
+- ✅ Inicia automaticamente com `docker-compose up -d`
+- ✅ Reinicia automaticamente se falhar
+- ✅ Processa jobs de email continuamente
 
 ---
 

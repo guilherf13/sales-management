@@ -11,6 +11,34 @@ Sistema completo de gerenciamento de vendas e comissões, construído com **Lara
 
 ---
 
+## 📸 Interface do Sistema
+
+### Dashboard
+Visão geral com métricas de vendas, comissões e estatísticas do período:
+
+![Dashboard - Métricas Principais](docs/imagens/dashboard1.png)
+
+Gráfico comparativo de vendas entre o mês atual e o mês anterior:
+
+![Dashboard - Gráfico Comparativo](docs/imagens/dashboard2.png)
+
+### Gerenciamento de Vendas
+Tela de listagem de vendas com filtros por vendedor e período:
+
+![Tela de Vendas](docs/imagens/vendas.png)
+
+### Gerenciamento de Vendedores
+Listagem de vendedores com busca por nome ou e-mail:
+
+![Tela de Vendedores](docs/imagens/vendedores1.png)
+
+### Paginação
+Sistema de paginação presente em todas as listagens:
+
+![Paginação](docs/imagens/pagination.png)
+
+---
+
 ## 📋 Índice
 
 - [Pré-requisitos](#-pré-requisitos)
@@ -174,6 +202,7 @@ Este projeto contém arquivos de documentação detalhada:
 | **[CONFIGURACAO_CONCLUIDA.md](docs/CONFIGURACAO_CONCLUIDA.md)** | Configuração completa de Mailpit e Redis, comandos úteis |
 | **[SISTEMA_EMAILS.md](docs/SISTEMA_EMAILS.md)** | Sistema de e-mails automáticos para administradores e vendedores |
 | **[COMO_TESTAR_EMAILS.md](docs/COMO_TESTAR_EMAILS.md)** | Guia prático para testar envio de e-mails |
+| **[TRATAMENTO_ERROS.md](docs/TRATAMENTO_ERROS.md)** | Sistema de tratamento de erros e mensagens amigáveis |
 
 ---
 
@@ -611,6 +640,7 @@ Obter estatísticas do dashboard.
 |---------|-----------|-----------|
 | **Frontend (Vue.js)** | http://localhost:5173 | Interface web do sistema |
 | **Backend (Laravel API)** | http://localhost:8080 | API RESTful |
+| **Queue Worker** | (background) | Processa filas de e-mails automaticamente |
 | **Mailpit (Web UI)** | http://localhost:8025 | Visualizar e-mails de desenvolvimento |
 | **Mailpit (SMTP)** | localhost:1025 | Porta SMTP para envio |
 | **Redis** | localhost:6379 | Cache e filas |
@@ -686,10 +716,13 @@ docker-compose exec app php artisan test
 
 ### Filas (Queue)
 ```bash
-# Iniciar worker
-docker-compose exec app php artisan queue:work
+# Ver logs do worker automático
+docker-compose logs -f queue
 
-# Processar apenas um job
+# Reiniciar worker
+docker-compose restart queue
+
+# Processar apenas um job manualmente
 docker-compose exec app php artisan queue:work --once
 
 # Ver jobs com falha
@@ -697,7 +730,12 @@ docker-compose exec app php artisan queue:failed
 
 # Reprocessar jobs com falha
 docker-compose exec app php artisan queue:retry all
+
+# Ver status do worker
+docker-compose ps queue
 ```
+
+> **Nota:** O worker já está configurado para rodar automaticamente em background. Não é necessário iniciá-lo manualmente.
 
 ### Mailpit
 ```bash
@@ -772,6 +810,7 @@ Para mais informações, consulte os arquivos de documentação:
 - [CONFIGURACAO_CONCLUIDA.md](docs/CONFIGURACAO_CONCLUIDA.md)
 - [SISTEMA_EMAILS.md](docs/SISTEMA_EMAILS.md)
 - [COMO_TESTAR_EMAILS.md](docs/COMO_TESTAR_EMAILS.md)
+- [TRATAMENTO_ERROS.md](docs/TRATAMENTO_ERROS.md)
 
 ---
 

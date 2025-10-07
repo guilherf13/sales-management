@@ -90,6 +90,23 @@ services:
     networks:
       - laravel
 
+  # Serviço do Worker de Filas (Queue Worker)
+  queue:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: laravel_queue
+    restart: unless-stopped
+    command: php artisan queue:work --tries=3 --timeout=60 --sleep=3 --max-time=3600
+    volumes:
+      - .:/var/www
+    networks:
+      - laravel
+    depends_on:
+      - app
+      - redis
+      - db
+
 # Define a rede customizada para os serviços se comunicarem
 networks:
   laravel:

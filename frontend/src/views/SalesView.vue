@@ -121,19 +121,23 @@
                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {{ formatDate(sale.sale_date) }}
                 </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                  <button
-                    @click="editSale(sale)"
-                    class="text-blue-600 hover:text-blue-900"
-                  >
-                    Editar
-                  </button>
-                  <button
-                    @click="deleteSale(sale)"
-                    class="text-red-600 hover:text-red-900"
-                  >
-                    Excluir
-                  </button>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <div class="flex items-center space-x-3">
+                    <button
+                      @click="editSale(sale)"
+                      title="Editar"
+                      class="text-blue-600 hover:text-blue-900 transition-colors"
+                    >
+                      <PencilSquareIcon class="h-5 w-5" />
+                    </button>
+                    <button
+                      @click="deleteSale(sale)"
+                      title="Excluir"
+                      class="text-red-600 hover:text-red-900 transition-colors"
+                    >
+                      <TrashIcon class="h-5 w-5" />
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -357,6 +361,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
+import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/outline';
 import { saleService } from '@/services/saleService';
 import { sellerService } from '@/services/sellerService';
 import type { Sale } from '@/services/saleService';

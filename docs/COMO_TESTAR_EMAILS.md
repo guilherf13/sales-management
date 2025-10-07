@@ -3,8 +3,9 @@
 ## ✅ Status Atual
 
 - ✅ **Mailpit** configurado e funcionando
-- ✅ **Worker de filas** rodando em background
+- ✅ **Worker de filas** rodando automaticamente em background (container `laravel_queue`)
 - ✅ **E-mail** testado e funcionando
+- ✅ **Inicialização automática** com `docker-compose up -d`
 
 ---
 
@@ -78,25 +79,34 @@ curl -X DELETE http://localhost:8025/api/v1/messages
 
 ### E-mail não chegou?
 
-1. **Verifique se o worker está rodando:**
+1. **Verifique se o worker automático está rodando:**
    ```bash
-   docker-compose logs app | grep queue
+   docker-compose ps queue
+   docker-compose logs queue --tail=20
    ```
 
-2. **Processe manualmente:**
+2. **Se necessário, reinicie o worker:**
+   ```bash
+   docker-compose restart queue
+   ```
+
+3. **Processe manualmente (para testes):**
    ```bash
    docker-compose exec app php artisan queue:work --once --verbose
    ```
 
-3. **Verifique o Mailpit:**
+4. **Verifique o Mailpit:**
    ```bash
    curl http://localhost:8025/api/v1/messages
    ```
 
-4. **Reinicie os serviços:**
+5. **Reinicie todos os serviços:**
    ```bash
-   docker-compose restart app mailpit
+   docker-compose restart app mailpit queue
    ```
+
+### ⚠️ Importante
+O sistema está configurado com um **worker automático** que inicia junto com o Docker. Você **NÃO** precisa executar manualmente o comando `php artisan queue:work`.
 
 ---
 
