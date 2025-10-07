@@ -810,7 +810,6 @@ Para mais informações, consulte os arquivos de documentação:
 - [CONFIGURACAO_CONCLUIDA.md](docs/CONFIGURACAO_CONCLUIDA.md)
 - [SISTEMA_EMAILS.md](docs/SISTEMA_EMAILS.md)
 - [COMO_TESTAR_EMAILS.md](docs/COMO_TESTAR_EMAILS.md)
-- [TRATAMENTO_ERROS.md](docs/TRATAMENTO_ERROS.md)
 
 ---
 
